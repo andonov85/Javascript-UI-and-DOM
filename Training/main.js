@@ -14,9 +14,9 @@ el.addEventListener('keypress', function (key) {
         let butt = document.createElement('button');
         butt.className = 'button';
         butt.innerText = el.value;
-        butt.style.backgroundColor = 'rgb(' + Math.floor((Math.random() * 1000) / 3.9216)
-            + ', ' + Math.floor((Math.random() * 1000) / 3.9216)
-            + ', ' + Math.floor((Math.random() * 1000) / 3.9216) + ')';
+        butt.style.backgroundColor = 'rgb(' + Math.floor(Math.random() * 100 + 100) +
+            ', ' + Math.floor(Math.random() * 155) +
+            ', ' + Math.floor(Math.random() * 100 + 155) + ')';
         document.getElementsByTagName('body')[0].appendChild(butt);
     }
 });
