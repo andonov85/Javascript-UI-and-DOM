@@ -17,6 +17,13 @@ function solve(selector) {
     }
     el.find('.button').text('hide');
     el.find('.button').on('click', function() {
-        console.log($(this).closest('div'));
+        if ($(this).next('.button').length === 0) {
+            if ($(this).text() === 'hide') {
+                $(this).text('show');
+            } else {
+                $(this).text('hide');
+            }
+            $(this).nextAll('.content').first().toggle();
+        }
     });
 }
