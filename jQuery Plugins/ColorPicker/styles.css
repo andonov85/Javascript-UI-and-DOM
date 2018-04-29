@@ -1,6 +1,6 @@
 #color-picker {
     width: 230px;
-    height: 293px;
+    height: 280px;
     border-radius: 8px;
     background-color: rgb(70, 69, 69);
 }
@@ -11,6 +11,7 @@
     width: 90px;
     border: none;
     margin-left: 10px;
+    font-size: 10px;
 }
 
 #rgb-input {
@@ -19,19 +20,21 @@
     border: none;
     margin-left: 10px;
     margin-top: 7px;
+    font-size: 10px;
 }
 
 #current-color {
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0px 0px 5px 5px white;
-    height: 50px;
-    width: 80px;
+    /* box-shadow: 0px 0px 5px 5px white; */
+    height: 40px;
+    width: 70px;
     float: right;
-    margin-right: 13px;
+    margin-right: 20px;
     margin-top: -20px;
     background: rgb(160, 102, 218);
 }
 
 #canvas-pallete {
+
 }
