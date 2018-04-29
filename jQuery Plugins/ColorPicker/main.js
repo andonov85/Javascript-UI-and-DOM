@@ -47,9 +47,9 @@
                 let y = event.pageY - offset.top;
                 let data = cty.getImageData(x, y, 230, 230).data;
                 let rgb = 'rgb(' + data[0] + ', ' + data[1] + ', ' + data[2] + ')';
-                let hex = '#' + data[0].toString(16)
-                              + data[1].toString(16)
-                              + data[2].toString(16);
+                let hex = '#' + data[0].toString(16) +
+                    data[1].toString(16) +
+                    data[2].toString(16);
                 $('#current-color').css('background', rgb);
                 $('#rgb-input').attr('value', rgb);
                 $('#hex-input').attr('value', hex);
@@ -57,6 +57,21 @@
                 copyText.select();
                 document.execCommand("Copy");
             })
+            $('#canvas-pallete').on('mousemove', function (event) {
+                let canv = document.getElementById('canvas-pallete');
+                let cty = canv.getContext('2d');
+                let offset = $(this).offset();
+                let x = event.pageX - offset.left;
+                let y = event.pageY - offset.top;
+                let data = cty.getImageData(x, y, 230, 230).data;
+                let rgb = 'rgb(' + data[0] + ', ' + data[1] + ', ' + data[2] + ')';
+                let hex = '#' + data[0].toString(16) +
+                    data[1].toString(16) +
+                    data[2].toString(16);
+                $('#current-color').css('background', rgb);
+                $('#rgb-input').attr('value', rgb);
+                $('#hex-input').attr('value', hex);
+            });
         });
     }
 }(jQuery));
