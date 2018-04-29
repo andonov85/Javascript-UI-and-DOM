@@ -12,6 +12,7 @@
     border: none;
     margin-left: 15px;
     font-size: 10px;
+    font-weight: 600;
 }
 
 #rgb-input {
@@ -21,6 +22,7 @@
     margin-left: 15px;
     margin-top: 7px;
     font-size: 10px;
+    font-weight: 600;
 }
 
 #current-color {
