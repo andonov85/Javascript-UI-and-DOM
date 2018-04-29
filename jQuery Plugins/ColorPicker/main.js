@@ -42,7 +42,10 @@
             $('#canvas-pallete').on('click', function (event) {
                 let canv = document.getElementById('canvas-pallete');
                 let cty = canv.getContext('2d');
-                let data = cty.getImageData(event.pageX, event.pageY, 230, 230).data;
+                let offset = $(this).offset();
+                let x = event.pageX - offset.left;
+                let y = event.pageY - offset.top;
+                let data = cty.getImageData(x, y, 230, 230).data;
                 let rgb = 'rgb(' + data[0] + ', ' + data[1] + ', ' + data[2] + ')';
                 let hex = '#' + data[0].toString(16)
                               + data[1].toString(16)
