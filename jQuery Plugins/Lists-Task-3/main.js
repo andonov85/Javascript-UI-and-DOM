@@ -19,20 +19,36 @@ let lists = [
                     table.append('<tr><th>');
                     table.find('th').text(value);
                     table.append('<tr><td><button>');
-                    table.find('button').after('<form><input>');
+                    table.find('button').after('<input type="text">');
                 } else {
                     table.append('<tr><td><a>');
                     table.find('a').last().attr({
+                        target: '_blank',
                         href: 'https://www.google.com/search?q=' + value
                     }).text(value);
                 }
             });
         }
+        // Hide/show button/input and inserts input value into table
         $this.find('input').hide();
         $this.find('button').on('click', function() {
             $(this).toggle();
-            $(this).next().find('input').toggle();
+            $(this).next().toggle();
         });
+        $this.find('input').on('keypress', function (event) {
+            if (event.which == 13) {
+                $(this).closest('table').append('<tr><td><a>');
+                $(this).closest('table').find('a').last().attr({
+                    target: '_blank',
+                    href: 'https://www.google.com/search?q=' + $(this).val()
+                }).text($(this).val());
+                $(this).val('')
+                    .toggle()
+                    .prev().toggle();
+            }
+        })
+        // Dragging
+        
     }
 }(jQuery));
 $('.container').lists(lists);
