@@ -14,6 +14,7 @@ let lists = [
         for (let i = 0; i < list.length; i += 1) {
             $this.append('<table id="Table-' + (i + 1) + '">');
             let table = $this.find('#Table-' + (i + 1));
+            table.css('display', 'inline');
             list[i].forEach(function (value, index) {
                 if (index === 0) {
                     table.append('<tr><th>');
@@ -31,12 +32,17 @@ let lists = [
         }
         // Hide/show button/input and inserts input value into table
         $this.find('input').hide();
-        $this.find('button').on('click', function() {
+        $this.find('button').on('click', function () {
             $(this).toggle();
             $(this).next().toggle();
         });
         $this.find('input').on('keypress', function (event) {
             if (event.which == 13) {
+                if ($(this).val().length == 0) {
+                    $(this).toggle()
+                        .prev().toggle();
+                    return;
+                }
                 $(this).closest('table').append('<tr><td><a>');
                 $(this).closest('table').find('a').last().attr({
                     target: '_blank',
@@ -47,8 +53,15 @@ let lists = [
                     .prev().toggle();
             }
         })
-        // Dragging
-        
+        // Draging and droping
+        $('tr').draggable();
+        $('tr').droppable({
+            drop: function (event, ui) {
+                ui.draggable.css('position', 'inherit');
+                $(this).after(ui.draggable);
+                $(this).preventDefault();
+            }
+        });
     }
 }(jQuery));
 $('.container').lists(lists);
