@@ -54,16 +54,20 @@ let lists = [
             }
         })
         // Draging and droping
-        $('.container').on('mousemove', function (event) {
-            // let offset = $(this).offset();
-            // let dx = event.pageX - offset.left;
-            // let dy = event.pageY - offset.top;
-            if (event.which === 1) {
+        $('.container').css('position', 'relative');
+        $('.container').on('mousedown', function (event) {
+            let offset = $(this).offset();
+            let dx = event.pageX - offset.left;
+            let dy = event.pageY - offset.top;
+            $(this).on('mousemove', function (event) {
                 $(this).css({
-                    left: event.pageX,
-                    top: event.pageY
+                    left: event.pageX - dx,
+                    top: event.pageY - dy
                 });
-            }
+            });
+            $(this).on('mouseup', function() {
+                $(this).off('mousemove');
+            });
         });
     }
 }(jQuery));
