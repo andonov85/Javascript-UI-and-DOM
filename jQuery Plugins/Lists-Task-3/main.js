@@ -54,20 +54,31 @@ let lists = [
             }
         })
         // Draging and droping
-        $('.container').css('position', 'relative');
-        $('.container').on('mousedown', function (event) {
-            let offset = $(this).offset();
-            let dx = event.pageX - offset.left;
-            let dy = event.pageY - offset.top;
-            $(this).on('mousemove', function (event) {
-                $(this).css({
-                    left: event.pageX - dx,
-                    top: event.pageY - dy
+        $this.find('a').css({
+            '-moz-user-select': 'none', // moz ff
+            'user-select': 'none',
+            'position': 'relative'
+        }).attr({
+            'ondragstart': 'return false;', // moz ff
+            'draggable': 'false'
+        });
+        $this.on('mousedown', function (event) {
+            if ($(event.target).is('a')) {
+                let offset = $(event.target).offset();
+                let dx = event.pageX - offset.left;
+                let dy = event.pageY - offset.top;
+                $(event.target).on('mousemove', function (event) {
+                    $(this).css({
+                        left: event.pageX - dx,
+                        top: event.pageY - dy
+                    });
+                    console.log(event.pageX + ' ' + event.pageY);
+                    console.log(dx + ' ' + dy);
                 });
-            });
-            $(this).on('mouseup', function() {
-                $(this).off('mousemove');
-            });
+                $(event.target).on('mouseup', function () {
+                    $(this).off('mousemove');
+                });
+            }
         });
     }
 }(jQuery));
