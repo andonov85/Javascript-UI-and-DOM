@@ -2,13 +2,14 @@
 /*jslint es6 */
 'use strict';
 let lists = [
-    ['Names', 'gosho', 'todor', 'ivan', 'kaloyan', 'gergana', 'john'],
-    ['Languages', 'french', 'english', 'german', 'spanish', 'russian', 'javascript'],
-    ['Cool things', 'icecream', 'dancing', 'party', 'beer', 'programming', 'diving', 'reading', 'learning']
+    ['Names', 'pesho', 'gosho', 'ivan'],
+    ['Languages', 'french', 'english', 'german'],
+    ['Cool things', 'icecream', 'dancing', 'party']
 ];
 (function ($) {
     $.fn.lists = function (list) {
         let $this = $(this);
+        $this.css('position', 'absolute');
         // Following must be done lists.length times
         $this.html('');
         for (let i = 0; i < list.length; i += 1) {
@@ -24,8 +25,8 @@ let lists = [
                 if (index === 0) {
                     table.append('<tr><th>');
                     table.find('th').text(value);
-                    table.append('<tr><td><button>');
-                    table.find('button').after('<input type="text" style="float: right; width: 180px">');
+                    table.append('<tr><td id="head"><button style="height: 28.5px; width: 28.5px; float: left; background: lightgreen; color: white; font-size: 23px; border: none">+</button>');
+                    table.find('button').after('<input type="text" style="float: right; width: 135px">');
                     table.append('<tbody>');
                 } else {
                     table.append('<tr><td style="width: 180px; text-align: center; border: 1px solid"><a style="text-decoration: none">');
@@ -69,27 +70,36 @@ let lists = [
             'draggable': 'false'
         });
         $this.on('mousedown', function (event) {
-            if (event.target.tagName === 'TD') {
+            if (event.target.tagName === 'TD' && event.target.id !== 'head') {
                 let $tr = $(event.target).parent();
-                let $td = $(event.target);
-                let offset = $td.offset();
+                let offset = $tr.offset();
                 let dx = event.pageX - offset.left;
                 let dy = event.pageY - offset.top;
-                $td.css('position', 'absolute');
+                $tr.css('position', 'absolute');
                 $(document).on('mousemove', function (event) {
-                    $td.css({
+                    $tr.css({
                         left: event.pageX - dx,
                         top: event.pageY - dy
                     });
                 });
                 $this.on('mouseup', function (event) {
                     $(document).off('mousemove');
-                    if (event.target.tagName === 'TD') {
-                    }
-                    
+                    $tr.hide();
+                    $this.on('mouseover', function (event) {
+                        // if ($(event.target).localName === 'td') {
+                            $(event.target).closest('tr').after($tr);
+                            $tr.css('position', 'inherit');
+                            $tr.show();
+                            $this.off('mouseover');
+                        // } else {
+                        //     $tr.show();
+                        //     $this.off('mouseover');
+                        // }
+                    });
+                    $this.off('mouseup');
                 });
             }
-        }
-    )};
+        })
+    };
 }(jQuery));
 $('.container').lists(lists);
