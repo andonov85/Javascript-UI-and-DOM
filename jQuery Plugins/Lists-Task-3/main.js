@@ -9,7 +9,7 @@ let lists = [
 (function ($) {
     $.fn.lists = function (list) {
         let $this = $(this);
-        $this.css('position', 'absolute');
+        $this.css('position', 'initial');
         // Following must be done lists.length times
         $this.html('');
         for (let i = 0; i < list.length; i += 1) {
@@ -85,16 +85,20 @@ let lists = [
                 $this.on('mouseup', function (event) {
                     $(document).off('mousemove');
                     $tr.hide();
-                    $this.on('mouseover', function (event) {
-                        // if ($(event.target).localName === 'td') {
+                    $(document).on('mouseover', function (event) {
+                        if (event.target.tagName === 'TD') {
                             $(event.target).closest('tr').after($tr);
-                            $tr.css('position', 'inherit');
+                            $tr.css({
+                                'left': 'auto',
+                                'top': 'auto',
+                                'position': 'initial'
+                            });
+                            $tr.show();
+                            $(document).off('mouseover');
+                        } else {
                             $tr.show();
                             $this.off('mouseover');
-                        // } else {
-                        //     $tr.show();
-                        //     $this.off('mouseover');
-                        // }
+                        }
                     });
                     $this.off('mouseup');
                 });
