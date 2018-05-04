@@ -14,6 +14,8 @@ let lists = [
 
         $('head').append('<style type="text/css" id="style-lists">');
         $('#style-lists').text(`
+        @import url('https://fonts.googleapis.com/css?family=Inconsolata');
+        @import url('https://fonts.googleapis.com/css?family=Inconsolata|Wellfleet');
             .Tables-Lists {
                 display: inline;
                 border-collapse: collapse;
@@ -32,6 +34,7 @@ let lists = [
             .Inputs-Lists {
                 float: center;
                 width: 135px;
+                height: 23px;
             }
             .tr-Lists:hover {
                 background-color: #99ccff;
@@ -48,6 +51,7 @@ let lists = [
             .td-Lists {
                 width: 200px;
                 text-align: center;
+                font-family: 'Inconsolata', monospace;
                 padding: 8px;
                 -moz-user-select: none;
                 user-select: none;
@@ -56,6 +60,7 @@ let lists = [
                 border: 1 px solid #ddd;
                 padding: 8px;
                 background: lightgreen;
+                font-family: 'Wellfleet', cursive;
                 color: #009999;
             }
             .Links-Lists {
