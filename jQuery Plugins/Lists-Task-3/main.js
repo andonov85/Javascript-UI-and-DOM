@@ -20,7 +20,6 @@ let lists = [
                 display: inline;
                 border-collapse: collapse;
                 width: 100%;
-                padding: 8px;
             }
             .Buttons-Lists {
                 height: 28.5px;
@@ -33,6 +32,7 @@ let lists = [
             }
             .Inputs-Lists {
                 float: center;
+                font-size: 17px;
                 width: 135px;
                 height: 23px;
             }
@@ -44,7 +44,7 @@ let lists = [
                 width: 200px;
                 text-align: center;
                 border: 1px solid #ddd;
-                padding: 8px;
+                //padding: 8px;
                 -moz-user-select: none;
                 user-select: none;
             }
@@ -66,7 +66,8 @@ let lists = [
             .Links-Lists {
                 text-decoration: none;
                 color: inherit;
-            }`);
+            }`
+        );
 
         // Following must be done lists.length times
 
