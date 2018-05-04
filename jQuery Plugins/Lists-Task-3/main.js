@@ -4,46 +4,64 @@
 let lists = [
     ['Names', 'Hulk Hogan', 'Felix Kjellberg', 'Gosho'],
     ['Languages', 'HTML5', 'CSS3', 'JavaScript'],
-    ['Cool things', 'Icecream', 'Dancing', 'Party']
+    ['Cool things', 'Icecream', 'Dancing', 'Party'],
+    ['Places', 'Copacabana', 'Bali', 'Haiti']
 ];
 (function ($) {
     $.fn.lists = function (list) {
-        
+
         // Injecting <style> in html - CSS
 
         $('head').append('<style type="text/css" id="style-lists">');
         $('#style-lists').text(`
             .Tables-Lists {
                 display: inline;
-                background: lightblue;
-                border: 1px solid;
                 border-collapse: collapse;
-                border-radius: 5px;
+                width: 100%;
+                padding: 8px;
             }
             .Buttons-Lists {
                 height: 28.5px;
                 width: 28.5px;
                 float: left;
-                background: lightgreen;
+                background: #cc99ff;
                 color: white;
                 font-size: 23px;
                 border: none;
             }
             .Inputs-Lists {
-                float: right;
+                float: center;
                 width: 135px;
             }
-            .tr-Lists .td-Lists {
+            .tr-Lists:hover {
+                background-color: #99ccff;
+                color: white;
+            }
+            .tr-Lists {
                 width: 200px;
                 text-align: center;
-                border: 1px solid;
+                border: 1px solid #ddd;
+                padding: 8px;
                 -moz-user-select: none;
                 user-select: none;
             }
+            .td-Lists {
+                width: 200px;
+                text-align: center;
+                padding: 8px;
+                -moz-user-select: none;
+                user-select: none;
+            }
+            .th-Lists {
+                border: 1 px solid #ddd;
+                padding: 8px;
+                background: lightgreen;
+                color: #009999;
+            }
             .Links-Lists {
                 text-decoration: none;
-            }`
-        );
+                color: inherit;
+            }`);
 
         // Following must be done lists.length times
 
@@ -54,7 +72,7 @@ let lists = [
             let table = $this.find('#Table-' + (i + 1));
             list[i].forEach(function (value, index) {
                 if (index === 0) {
-                    table.append('<tr class="tr-Lists"><th>');
+                    table.append('<tr class="tr-Lists"><th class="th-Lists">');
                     table.find('th').text(value);
                     table.append('<tr class="tr-Lists"><td id="head-Lists"><button class="Buttons-Lists">+</button>');
                     table.find('button').after('<input type="text" class="Inputs-Lists">');
@@ -87,7 +105,7 @@ let lists = [
                 $(this).closest('table').find('a').last().attr({
                     target: '_blank',
                     href: 'https://www.google.com/search?q=' + $(this).val()
-                }).text($(this).val());
+                    }).text($(this).val());
                 $(this).val('')
                     .toggle()
                     .prev().toggle();
